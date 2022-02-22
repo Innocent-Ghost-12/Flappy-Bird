@@ -15,10 +15,11 @@ BACKGROUND = 'resources/sprites/background.png'
 PIPE = 'resources/sprites/pipe.png'
 
 def welcomescreen():
-    playerx = int(SCREENWIDTH/5)
-    playery = int((SCREENHEIGHT - GAME_SPRITES['player'].get_height())/2)
-    messagex = int((SCREENHEIGHT - GAME_SPRITES['message'].get_width())/2)
+    playerx = int(SCREENWIDTH / 5)
+    playery = int((SCREENHEIGHT - GAME_SPRITES['player'].get_height()) / 2)
+    messagex = int((SCREENWIDTH - GAME_SPRITES['message'].get_width())/2)
     messagey = int(SCREENHEIGHT * 0.13)
+
     basex = 0
     while True:
         for event in pygame.event.get():
@@ -29,8 +30,9 @@ def welcomescreen():
                 return
             else:
                 SCREEN.blit(GAME_SPRITES['background'],(0,0))
-                SCREEN.blit(GAME_SPRITES['player'],(playerx,playery))
+
                 SCREEN.blit(GAME_SPRITES['message'],(messagex,messagey))
+                SCREEN.blit(GAME_SPRITES['player'], (playerx, playery))
                 SCREEN.blit(GAME_SPRITES['base'],(basex,GROUNDY))
                 pygame.display.update()
                 FPSCLOCK.tick(FPS)
@@ -173,7 +175,7 @@ if __name__ == '__main__':
         pygame.image.load('resources/sprites/9.png')
     )
 
-    GAME_SPRITES['message'] = pygame.image.load('resources/sprites/background.png').convert_alpha()
+    GAME_SPRITES['message'] = pygame.image.load('resources/sprites/message.png').convert_alpha()
     GAME_SPRITES['base'] = pygame.image.load('resources/sprites/base.png').convert_alpha()
     GAME_SPRITES['pipe'] = (pygame.transform.rotate(pygame.image.load(PIPE).convert_alpha(), 180), pygame.image.load(PIPE).convert_alpha())
 
@@ -184,7 +186,7 @@ if __name__ == '__main__':
     GAME_SOUNDS['wing'] = pygame.mixer.Sound('resources/audio/wing.wav')
 
     GAME_SPRITES['background'] = pygame.image.load(BACKGROUND).convert()
-    GAME_SPRITES['player'] = pygame.image.load(PLAYER).convert()
+    GAME_SPRITES['player'] = pygame.image.load(PLAYER).convert_alpha()
 
     while True:
         welcomescreen()
